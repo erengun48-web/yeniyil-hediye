@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yeni Yıla Seninle ❤️</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Segoe UI',sans-serif;
+}
+
+body{
+  height:100vh;
+  background:linear-gradient(180deg,#0f2027,#203a43,#2c5364);
+  overflow:hidden;
+  color:white;
+}
+
+/* ÜST YAZI */
+.header{
+  position:absolute;
+  top:40px;
+  width:100%;
+  text-align:center;
+  z-index:5;
+}
+
+/* ❤️ KALP */
+.heart{
+  width:160px;
+  height:160px;
+  background:#d60000;
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%) rotate(-45deg);
+  animation:beat 1.1s infinite;
+  cursor:pointer;
+  z-index:5;
+}
+.heart::before,
+.heart::after{
+  content:"";
+  width:160px;
+  height:160px;
+  background:#d60000;
+  border-radius:50%;
+  position:absolute;
+}
+.heart::before{top:-80px;}
+.heart::after{left:80px;}
+
+@keyframes beat{
+  0%{transform:translate(-50%,-50%) rotate(-45deg) scale(1);}
+  50%{transform:translate(-50%,-50%) rotate(-45deg) scale(1.25);}
+  100%{transform:translate(-50%,-50%) rotate(-45deg) scale(1);}
+}
+
+/* 👇 KALP ALTI YAZI */
+.tap-text{
+  position:absolute;
+  top:calc(50% + 120px);
+  left:50%;
+  transform:translateX(-50%);
+  font-size:1.1rem;
+  opacity:.9;
+  animation:pulse 1.5s infinite;
+  z-index:5;
+}
+
+@keyframes pulse{
+  0%{opacity:.4;}
+  50%{opacity:1;}
+  100%{opacity:.4;}
+}
+
+/* ❄️ KAR */
+.snow{
+  position:absolute;
+  top:-10px;
+  opacity:.8;
+  animation:fall linear infinite;
+  z-index:1;
+}
+@keyframes fall{
+  to{transform:translateY(110vh);}
+}
+
+/* 🚀 ALT FÜZE */
+.rocket{
+  position:absolute;
+  bottom:-40px;
+  left:50%;
+  transform:translateX(-50%);
+  font-size:24px;
+  animation:launch .9s ease-out forwards;
+  z-index:4;
+}
+@keyframes launch{
+  to{bottom:50%;}
+}
+
+/* 🎇 PATLAMA */
+.explosion{
+  position:absolute;
+  font-size:28px;
+  animation:explode 1s ease-out forwards;
+  z-index:4;
+}
+@keyframes explode{
+  0%{transform:scale(0);}
+  100%{transform:scale(3);opacity:0;}
+}
+
+/* 💬 YAZI */
+.center-text{
+  position:absolute;
+  font-size:2rem;
+  font-weight:bold;
+  opacity:0;
+  animation:showText 2.5s ease forwards;
+  z-index:5;
+}
+@keyframes showText{
+  0%{opacity:0;}
+  20%{opacity:1;}
+  80%{opacity:1;}
+  100%{opacity:0;}
+}
+
+/* 🎆 YAN HAVAİ FİŞEK */
+.side-firework{
+  position:absolute;
+  font-size:26px;
+  animation:sideExplode 1.4s ease-out forwards;
+  z-index:2;
+}
+@keyframes sideExplode{
+  0%{transform:scale(0);}
+  100%{transform:scale(3);opacity:0;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+  <h1>🎄 Yeni Yıla Seninle ❤️</h1>
+  <div>Bu kalp sadece senin için atıyor</div>
+</div>
+
+<div class="heart" onclick="surprise()"></div>
+<div class="tap-text">Kalbe dokun 💫</div>
+
+<script>
+/* ❄️ KAR */
+for(let i=0;i<70;i++){
+  const s=document.createElement("div");
+  s.className="snow";
+  s.innerHTML="❄";
+  s.style.left=Math.random()*100+"vw";
+  s.style.fontSize=Math.random()*10+10+"px";
+  s.style.animationDuration=Math.random()*5+5+"s";
+  document.body.appendChild(s);
+}
+
+/* 🌈 RENK */
+function randomColor(){
+  const colors=["#ff4d4d","#ff66cc","#ffcc00","#66ffcc","#66a3ff","#c77dff"];
+  return colors[Math.floor(Math.random()*colors.length)];
+}
+
+/* 👆 KALP TIK */
+function surprise(){
+  const x=Math.random()*(window.innerWidth-100)+50;
+  const y=Math.random()*(window.innerHeight-200)+100;
+  const color=randomColor();
+
+  const rocket=document.createElement("div");
+  rocket.className="rocket";
+  rocket.innerHTML="🎆";
+  document.body.appendChild(rocket);
+
+  setTimeout(()=>{
+    rocket.remove();
+
+    const boom=document.createElement("div");
+    boom.className="explosion";
+    boom.innerHTML="💥";
+    boom.style.left=x+"px";
+    boom.style.top=y+"px";
+    boom.style.color=color;
+    document.body.appendChild(boom);
+
+    const text=document.createElement("div");
+    text.className="center-text";
+    text.innerHTML="I love you ❤️ DEFNEM";
+    text.style.left=x+"px";
+    text.style.top=y+"px";
+    text.style.color=color;
+    text.style.transform="translate(-50%,-50%)";
+    document.body.appendChild(text);
+
+    setTimeout(()=>{
+      boom.remove();
+      text.remove();
+    },2500);
+  },800);
+}
+
+/* 🎆 YAN KALPLİ HAVAİ FİŞEKLER */
+function sideFirework(side){
+  const hearts=["❤️","💖","💜","💛","💙"];
+  for(let i=0;i<10;i++){
+    const f=document.createElement("div");
+    f.className="side-firework";
+    f.innerHTML=hearts[Math.floor(Math.random()*hearts.length)];
+    f.style.left=side==="left"?"6%":"94%";
+    f.style.top=Math.random()*60+20+"%";
+    f.style.color=randomColor();
+    document.body.appendChild(f);
+    setTimeout(()=>f.remove(),1400);
+  }
+}
+
+setInterval(()=>{
+  sideFirework("left");
+  sideFirework("right");
+},1200);
+</script>
+
+</body>
+</html>
